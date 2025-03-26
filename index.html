@@ -1,77 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body>
-    <div class="container text-dark">
-        <div class="calculator">
-            <form>
-                <div class="display">
-                    <input type="text" name="display" class="te">
+
+<body class="bg-gray-800">
+
+    <div class="flex justify-center items-center min-h-screen">
+        <div class="calculator bg-gray-900 p-6 rounded-lg shadow-xl w-full max-w-sm">
+            <form action="" class="space-y-4">
+                <div class="flex justify-center mb-4">
+                    <input type="text" id="display" class="w-full p-4 text-2xl text-right bg-white text-black rounded-lg" disabled>
                 </div>
-                <div>
-                    <input type="button" value="AC" onclick="display.value = '' " class="operator">
-                    <input type="button" value="DE" onclick="display.value = display.value.toString().slice(0,-1)" class="operator">
-                    <input type="button" value="." onclick="display.value += '.' ">
-                    <input type="button" value="%" onclick="calculatePercentage()">
+
+                
+                <div class="grid grid-cols-4 gap-4">
+                  
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="clear">AC</button>
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="delete">DEL</button>
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="percent">%</button>
+                    <button type="button" class="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700" id="divide">/</button>
                 </div>
-                <div>
-                    <input type="button" value="7" onclick="display.value += '7' ">
-                    <input type="button" value="8" onclick="display.value += '8' ">
-                    <input type="button" value="9" onclick="display.value += '9' ">
-                    <input type="button" value="/" onclick="display.value += '/' ">
+
+                <div class="grid grid-cols-4 gap-4">
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="nine">9</button>
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="seven">7</button>
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="eight">8</button>
+                    <button type="button" class="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700" id="multiply">*</button>
+
                 </div>
-                <div>
-                    <input type="button" value="4" onclick="display.value += '4' ">
-                    <input type="button" value="5" onclick="display.value += '5' ">
-                    <input type="button" value="6" onclick="display.value += '6' ">
-                    <input type="button" value="*" onclick="display.value += '*' ">
+
+                <div class="grid grid-cols-4 gap-4">
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="six">6</button>
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="four">4</button>
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="five">5</button>
+                    <button type="button" class="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700" id="subtract">-</button>
                 </div>
-                <div>
-                    <input type="button" value="1" onclick="display.value += '1' ">
-                    <input type="button" value="2" onclick="display.value += '2' ">
-                    <input type="button" value="3" onclick="display.value += '3' ">
-                    <input type="button" value="-" onclick="display.value += '-' ">
+
+                <div class="grid grid-cols-4 gap-4">
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="three">3</button>
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="one">1</button>
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="two">2</button>
+                    <button type="button" class="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700" id="add">+</button>
                 </div>
-                <div>
-                    <input type="button" value="00" onclick="display.value += '00' ">
-                    <input type="button" value="0" onclick="display.value += '0' ">
-                    <input type="button" value="=" onclick="display.value = eval(display.value)">
-                    <input type="button" value="+" onclick="display.value += '+' " class="equal">
+
+                <div class="grid grid-cols-4 gap-4">
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="doubleZero">00</button>
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="zero">0</button>
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="dot">.</button>
+                    <button type="button" class="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700" id="equals">=</button>
                 </div>
             </form>
         </div>
     </div>
+
     <script>
-        let previousValue = ''; 
-        let operator = ''; 
-    
-        function calculatePercentage() {
-            let currentValue = parseFloat(display.value);
-            if (previousValue !== '') {
-               
-                let result = (currentValue / 100) * parseFloat(previousValue);
-                display.value = result;
-            } else {
-                
-                display.value = currentValue / 100;
+        $(document).ready(function () {
+           
+            function displayout(value) {
+                $('#display').val($('#display').val() + value);
             }
-        }
-    
-        function setOperator(op) {
-            previousValue = display.value;  
-            operator = op;  
-            display.value = ''; 
-        }
-    
-        function evaluate() {
-            display.value = eval(display.value);
-        }
+
+     
+            $('#clear').click(function () {
+                $('#display').val('');
+            });
+
+            $('#delete').click(function () {
+                let currentValue = $('#display').val();
+                $('#display').val(currentValue.slice(0, -1));
+            });
+
+
+            $('#dot').click(function () {
+                let currentValue = $('#display').val();
+                if (!currentValue.includes('.')) {
+                    $('#display').val(currentValue + '.');
+                }
+            });
+
+
+            $('#percent').click(function () {
+                let currentValue = $('#display').val();
+                if (currentValue) {
+                    $('#display').val(currentValue / 100);
+                }
+            });
+
+
+            $('#equals').click(function () {
+                let currentValue = $('#display').val();
+                if (currentValue) {
+                    try {
+                        let result = eval(currentValue);
+                        $('#display').val(result);
+                    } catch (e) {
+                        $('#display').val('Error');
+                    }
+                }
+            });
+
+       
+            $('#divide').click(function () { displayout('/') });
+            $('#multiply').click(function () { displayout('*') });
+            $('#subtract').click(function () { displayout('-') });
+            $('#add').click(function () { displayout('+') });
+
+        
+            $('#seven').click(function () { displayout('7') });
+            $('#eight').click(function () { displayout('8') });
+            $('#nine').click(function () { displayout('9') });
+            $('#four').click(function () { displayout('4') });
+            $('#five').click(function () { displayout('5') });
+            $('#six').click(function () { displayout('6') });
+            $('#one').click(function () { displayout('1') });
+            $('#two').click(function () { displayout('2') });
+            $('#three').click(function () { displayout('3') });
+            $('#doubleZero').click(function () { displayout('00') });
+            $('#zero').click(function () { displayout('0') });
+        });
     </script>
 </body>
+
 </html>
