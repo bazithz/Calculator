@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body class="bg-gray-800">
@@ -28,24 +26,24 @@
                 </div>
 
                 <div class="grid grid-cols-4 gap-4">
-                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="nine">9</button>
                     <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="seven">7</button>
                     <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="eight">8</button>
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="nine">9</button>
                     <button type="button" class="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700" id="multiply">*</button>
 
                 </div>
 
                 <div class="grid grid-cols-4 gap-4">
-                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="six">6</button>
                     <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="four">4</button>
                     <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="five">5</button>
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="six">6</button>
                     <button type="button" class="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700" id="subtract">-</button>
                 </div>
 
                 <div class="grid grid-cols-4 gap-4">
-                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="three">3</button>
                     <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="one">1</button>
                     <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="two">2</button>
+                    <button type="button" class="bg-white text-black p-4 rounded-lg hover:bg-gray-300" id="three">3</button>
                     <button type="button" class="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700" id="add">+</button>
                 </div>
 
@@ -58,73 +56,8 @@
             </form>
         </div>
     </div>
-
-    <script>
-        $(document).ready(function () {
-           
-            function displayout(value) {
-                $('#display').val($('#display').val() + value);
-            }
-
-     
-            $('#clear').click(function () {
-                $('#display').val('');
-            });
-
-            $('#delete').click(function () {
-                let currentValue = $('#display').val();
-                $('#display').val(currentValue.slice(0, -1));
-            });
-
-
-            $('#dot').click(function () {
-                let currentValue = $('#display').val();
-                if (!currentValue.includes('.')) {
-                    $('#display').val(currentValue + '.');
-                }
-            });
-
-
-            $('#percent').click(function () {
-                let currentValue = $('#display').val();
-                if (currentValue) {
-                    $('#display').val(currentValue / 100);
-                }
-            });
-
-
-            $('#equals').click(function () {
-                let currentValue = $('#display').val();
-                if (currentValue) {
-                    try {
-                        let result = eval(currentValue);
-                        $('#display').val(result);
-                    } catch (e) {
-                        $('#display').val('Error');
-                    }
-                }
-            });
-
-       
-            $('#divide').click(function () { displayout('/') });
-            $('#multiply').click(function () { displayout('*') });
-            $('#subtract').click(function () { displayout('-') });
-            $('#add').click(function () { displayout('+') });
-
-        
-            $('#seven').click(function () { displayout('7') });
-            $('#eight').click(function () { displayout('8') });
-            $('#nine').click(function () { displayout('9') });
-            $('#four').click(function () { displayout('4') });
-            $('#five').click(function () { displayout('5') });
-            $('#six').click(function () { displayout('6') });
-            $('#one').click(function () { displayout('1') });
-            $('#two').click(function () { displayout('2') });
-            $('#three').click(function () { displayout('3') });
-            $('#doubleZero').click(function () { displayout('00') });
-            $('#zero').click(function () { displayout('0') });
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/scripts.js"></script>
 </body>
-
 </html>
